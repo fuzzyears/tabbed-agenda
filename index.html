@@ -1,0 +1,171 @@
+<html>
+<!-- html -->
+
+<body>
+    <div class="wrapper">
+        <!-- tab buttons. -->
+        <div class="button-wrapper">
+            <button class="tab-button active" data-id="tab0">Day One<br>June 20, 2025</button>
+            <button class="tab-button" data-id="tab1">Day Two<br>June 21, 2025</button>
+            <button class="tab-button" data-id="tab2">Day Three<br>June 23, 2025</button>
+        </div>
+        <!-- each content block must correspond to a tab button. see above for tab buttons. -->
+        <div class="content-wrapper">
+
+            <!-- start content block -->
+            <div class="content-block active" id="tab0">
+                <!-- start agenda item -->
+                <div class="agenda-item">
+                    <p class="session-time">Start Time – End Time</p>
+                    <h3>Title</h3>
+                    <div class="session-description">
+                        <!-- icon -->
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>Location</p>
+                    </div>
+                </div>
+                <!-- end agenda item -->
+
+                <!-- start agenda item -->
+                <div class="agenda-item">
+                    <p class="session-time">Start Time – End Time</p>
+                    <h3>Title</h3>
+                    <div class="session-description">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>Location</p>
+                    </div>
+                </div>
+                <!-- end agenda item -->
+            </div>
+            <!-- end content block -->
+        </div>
+    </div>
+</body>
+
+<!-- styles -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+    :root {
+        --primary-color: #3752A6;
+        --highlight-color: #419FD9;
+        --hover-color: #d5e3ff;
+        --text-color: #000;
+        --alt-text-color: #fff;
+        --background-color: #f4f2ee;
+        --agenda-body-color: #fff;
+    }
+
+    body {
+        text-align: center;
+        font-family: 'Roboto Condensed', serif;
+        font-size: 18px;
+    }
+
+    .wrapper {
+        width: 80%;
+        margin: auto;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .button-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        /* i'm a little concerned i don't understand how this works entirely yet... */
+    }
+
+    .tab-button {
+        height: 72px;
+        letter-spacing: 1px;
+        border: none;
+        padding: 10px;
+        margin-right: 20px;
+        background-color: var(--primary-color);
+        color: var(--alt-text-color);
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.5s;
+        font-weight: bold;
+        /* specificity? i don't know why this is needed. it won't apply otherwise. */
+    }
+
+    .tab-button:hover {
+        background-color: var(--hover-color);
+    }
+
+    .tab-button.active {
+        background-color: var(--highlight-color);
+    }
+
+    .content-wrapper {
+        padding: 15px;
+        background-color: var(--background-color);
+    }
+
+    .content-block {
+        display: none;
+    }
+
+    .content-block.active {
+        display: block;
+        background-color: var(--agenda-body-color);
+    }
+
+    .agenda-item {
+        text-align: left;
+        padding: 30px 20px;
+        border-bottom: 2px solid var(--background-color);
+    }
+
+    .session-time {
+        color: var(--highlight-color);
+        font-size: 18px;
+        margin: 0 0 5px 0;
+    }
+
+    .content-block h3 {
+        font-size: 26px;
+        margin: 5px 0 5px 0;
+    }
+
+    .session-description {
+        display: flex;
+        align-items: start;
+    }
+
+    .session-description img {
+        height: 100%;
+    }
+
+    .session-description p {
+        margin: 0 0 0 10px;
+    }
+</style>
+
+<!-- script -->
+ <!-- fa icons -->
+<script src="https://kit.fontawesome.com/bbfc681302.js" crossorigin="anonymous"></script>
+<script>
+    const tabs = document.querySelector(".wrapper");
+    const tabButton = document.querySelectorAll(".tab-button");
+    const contents = document.querySelectorAll(".content-block");
+
+    tabs.onclick = e => {
+        const id = e.target.dataset.id;
+        if (id) {
+            tabButton.forEach(btn => {
+                btn.classList.remove("active");
+            });
+            e.target.classList.add("active");
+
+            contents.forEach(content => {
+                content.classList.remove("active");
+            });
+            const element = document.getElementById(id);
+            element.classList.add("active");
+        }
+    }
+</script>
+
+</html>
